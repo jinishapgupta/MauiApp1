@@ -70,6 +70,7 @@ namespace MauiApp1.ViewModels
             });
 
             FilterCommand = new Command<string>(OnFilter);
+            OnFilter(SelectedCategory);
         }
 
         private void OnFilter(string categoryName)
@@ -79,7 +80,7 @@ namespace MauiApp1.ViewModels
                 if (c.Name == categoryName)
                 {
                     c.IsSelected = true;
-                    c.BackgroundColor = Color.FromArgb("#8BC34A"); // green
+                    c.BackgroundColor = Color.FromArgb("#8BC34A"); 
                     c.TextColor = Colors.Black;
                 }
                 else
