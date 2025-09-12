@@ -43,7 +43,7 @@
         <VerticalStackLayout Padding="10" Spacing="20">
 
             <!-- Category Buttons with Arrows -->
-            <Grid HorizontalOptions="Start" HeightRequest="60" MaximumWidthRequest="1000">
+            <Grid HeightRequest="60">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="40"/>
                     <!-- Left arrow -->
@@ -63,23 +63,42 @@
 
                 <!-- Category Buttons ScrollView -->
                 <ScrollView x:Name="CategoryScroll"
-            Grid.Column="1"
-            Orientation="Horizontal"
-            VerticalOptions="Center"
-            HorizontalScrollBarVisibility="Never">
+                            Grid.Column="1"
+                            Orientation="Horizontal"
+                            VerticalOptions="Center"
+                            HorizontalScrollBarVisibility="Never">
                     <FlexLayout Direction="Row"
-                Wrap="NoWrap"
-                JustifyContent="Start"
-                Padding="0,6,0,0"
-                BindableLayout.ItemsSource="{Binding Categories}">
+                                Wrap="NoWrap"
+                                JustifyContent="Start"
+                                Padding="0,6,0,0"
+                                BindableLayout.ItemsSource="{Binding Categories}">
                         <BindableLayout.ItemTemplate>
                             <DataTemplate>
-                                <controls:CategoryButton BindingContext="{Binding}" />
+                                <Button HeightRequest="40"
+                                        Text="{Binding Name}"
+                                        BackgroundColor="{Binding BackgroundColor}"
+                                        TextColor="{Binding TextColor}"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type views:MainPage}},
+                                                          Path=BindingContext.FilterCommand}"
+                                        CommandParameter="{Binding Name}"
+                                        Style="{StaticResource CategoryButtonStyle}">
+                                    <Button.Triggers>
+                                        <!-- Disable hover when selected -->
+                                        <DataTrigger TargetType="Button"
+                                                     Binding="{Binding IsSelected}"
+                                                     Value="True">
+                                            <Setter Property="VisualStateManager.VisualStateGroups">
+                                                <VisualStateGroupList>
+                                                    <VisualStateGroup Name="NoHover" />
+                                                </VisualStateGroupList>
+                                            </Setter>
+                                        </DataTrigger>
+                                    </Button.Triggers>
+                                </Button>
                             </DataTemplate>
                         </BindableLayout.ItemTemplate>
                     </FlexLayout>
                 </ScrollView>
-
 
                 <!-- Right Arrow -->
                 <Button x:Name="RightArrow"
