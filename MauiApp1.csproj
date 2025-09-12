@@ -66,12 +66,18 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="Controls\CategoryButton.xaml.cs">
+	    <DependentUpon>CategoryButton.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Controls\ProductCard.xaml.cs">
 	    <DependentUpon>ProductCard.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="Controls\CategoryButton.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Controls\ProductCard.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
