@@ -16,9 +16,9 @@ namespace MauiApp1.Models
 
         [ObservableProperty]
         decimal price;
-
         [ObservableProperty]
         string? image;
+       
 
         [ObservableProperty]
         int quantity;
@@ -28,5 +28,11 @@ namespace MauiApp1.Models
 
         [ObservableProperty]
         string? borderColor = "#CCCCCC";
+
+        [ObservableProperty]
+        string? category;
+        public bool HasRibbon => !string.IsNullOrEmpty(RibbonColor);
+
+
     }
 }

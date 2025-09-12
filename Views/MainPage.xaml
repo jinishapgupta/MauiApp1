@@ -1,0 +1,129 @@
+﻿<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MauiApp1.Views.MainPage"
+             xmlns:views="clr-namespace:MauiApp1.Views"
+             xmlns:controls="clr-namespace:MauiApp1.Controls"
+             x:Name="RootPage"
+             BackgroundColor="#F2F2F2">
+
+    <ContentPage.Resources>
+        <!-- Base Style for Category Buttons -->
+        <Style x:Key="CategoryButtonStyle" TargetType="Button">
+            <Setter Property="WidthRequest" Value="160"/>
+            <Setter Property="HeightRequest" Value="40"/>
+            <Setter Property="CornerRadius" Value="15"/>
+            <Setter Property="FontAttributes" Value="Bold"/>
+            <Setter Property="BorderColor" Value="#CCCCCC"/>
+            <Setter Property="BorderWidth" Value="1"/>
+            <Setter Property="Margin" Value="4"/>
+
+            <!-- Hover states (only apply when not selected) -->
+            <Setter Property="VisualStateManager.VisualStateGroups">
+                <VisualStateGroupList>
+                    <VisualStateGroup Name="HoverStates">
+                        <VisualState Name="Normal">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" Value="White" />
+                                <Setter Property="TextColor" Value="Black" />
+                            </VisualState.Setters>
+                        </VisualState>
+                        <VisualState Name="PointerOver">
+                            <VisualState.Setters>
+                                <Setter Property="BackgroundColor" Value="#E4E2E2" />
+                                <Setter Property="TextColor" Value="Black" />
+                            </VisualState.Setters>
+                        </VisualState>
+                    </VisualStateGroup>
+                </VisualStateGroupList>
+            </Setter>
+        </Style>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="10" Spacing="20">
+
+            <!-- Category Buttons with Arrows -->
+            <Grid HeightRequest="60">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40"/>
+                    <!-- Left arrow -->
+                    <ColumnDefinition Width="*"/>
+                    <!-- Scroll area -->
+                    <ColumnDefinition Width="40"/>
+                    <!-- Right arrow -->
+                </Grid.ColumnDefinitions>
+
+                <!-- Left Arrow -->
+                <Button x:Name="LeftArrow"
+                        Text="◀"
+                        TextColor="#005FA6"
+                        BackgroundColor="Transparent"
+                        Grid.Column="0"
+                        Clicked="OnScrollLeftClicked" />
+
+                <!-- Category Buttons ScrollView -->
+                <ScrollView x:Name="CategoryScroll"
+                            Grid.Column="1"
+                            Orientation="Horizontal"
+                            VerticalOptions="Center"
+                            HorizontalScrollBarVisibility="Never">
+                    <FlexLayout Direction="Row"
+                                Wrap="NoWrap"
+                                JustifyContent="Start"
+                                Padding="0,6,0,0"
+                                BindableLayout.ItemsSource="{Binding Categories}">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <Button HeightRequest="40"
+                                        Text="{Binding Name}"
+                                        BackgroundColor="{Binding BackgroundColor}"
+                                        TextColor="{Binding TextColor}"
+                                        Command="{Binding Source={RelativeSource AncestorType={x:Type views:MainPage}},
+                                                          Path=BindingContext.FilterCommand}"
+                                        CommandParameter="{Binding Name}"
+                                        Style="{StaticResource CategoryButtonStyle}">
+                                    <Button.Triggers>
+                                        <!-- Disable hover when selected -->
+                                        <DataTrigger TargetType="Button"
+                                                     Binding="{Binding IsSelected}"
+                                                     Value="True">
+                                            <Setter Property="VisualStateManager.VisualStateGroups">
+                                                <VisualStateGroupList>
+                                                    <VisualStateGroup Name="NoHover" />
+                                                </VisualStateGroupList>
+                                            </Setter>
+                                        </DataTrigger>
+                                    </Button.Triggers>
+                                </Button>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </FlexLayout>
+                </ScrollView>
+
+                <!-- Right Arrow -->
+                <Button x:Name="RightArrow"
+                        Text="▶"
+                        TextColor="#005FA6"
+                        BackgroundColor="Transparent"
+                        Grid.Column="2"
+                        Clicked="OnScrollRightClicked" />
+            </Grid>
+
+            <!-- Product Cards -->
+            <FlexLayout Direction="Row"
+                        Wrap="Wrap"
+                        JustifyContent="Start"
+                        AlignItems="Start"
+                        AlignContent="Start"
+                        BindableLayout.ItemsSource="{Binding FilteredProducts}">
+                <BindableLayout.ItemTemplate>
+                    <DataTemplate>
+                        <!-- Reusable ProductCard -->
+                        <controls:ProductCard BindingContext="{Binding}" />
+                    </DataTemplate>
+                </BindableLayout.ItemTemplate>
+            </FlexLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
