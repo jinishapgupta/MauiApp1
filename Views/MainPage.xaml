@@ -7,7 +7,7 @@
              BackgroundColor="#F2F2F2">
 
     <ContentPage.Resources>
-        <!-- Base Style for Category Buttons -->
+      
         <Style x:Key="CategoryButtonStyle" TargetType="Button">
             <Setter Property="WidthRequest" Value="160"/>
             <Setter Property="HeightRequest" Value="40"/>
@@ -16,8 +16,6 @@
             <Setter Property="BorderColor" Value="#CCCCCC"/>
             <Setter Property="BorderWidth" Value="1"/>
             <Setter Property="Margin" Value="4"/>
-
-            <!-- Hover states (only apply when not selected) -->
             <Setter Property="VisualStateManager.VisualStateGroups">
                 <VisualStateGroupList>
                     <VisualStateGroup Name="HoverStates">
@@ -41,28 +39,19 @@
 
     <ScrollView>
         <VerticalStackLayout Padding="10" Spacing="20">
-
-            <!-- Category Buttons with Arrows -->
-            <Grid HeightRequest="60">
+            <Grid HeightRequest="60" MaximumWidthRequest="1000" HorizontalOptions="Start">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="40"/>
-                    <!-- Left arrow -->
                     <ColumnDefinition Width="*"/>
-                    <!-- Scroll area -->
                     <ColumnDefinition Width="40"/>
-                    <!-- Right arrow -->
-                </Grid.ColumnDefinitions>
-
-                <!-- Left Arrow -->
-                <Button x:Name="LeftArrow"
+            </Grid.ColumnDefinitions>
+              <Button x:Name="LeftArrow"
                         Text="◀"
                         TextColor="#005FA6"
                         BackgroundColor="Transparent"
                         Grid.Column="0"
                         Clicked="OnScrollLeftClicked" />
-
-                <!-- Category Buttons ScrollView -->
-                <ScrollView x:Name="CategoryScroll"
+                 <ScrollView x:Name="CategoryScroll"
                             Grid.Column="1"
                             Orientation="Horizontal"
                             VerticalOptions="Center"
@@ -83,8 +72,7 @@
                                         CommandParameter="{Binding Name}"
                                         Style="{StaticResource CategoryButtonStyle}">
                                     <Button.Triggers>
-                                        <!-- Disable hover when selected -->
-                                        <DataTrigger TargetType="Button"
+                                    <DataTrigger TargetType="Button"
                                                      Binding="{Binding IsSelected}"
                                                      Value="True">
                                             <Setter Property="VisualStateManager.VisualStateGroups">
@@ -100,8 +88,7 @@
                     </FlexLayout>
                 </ScrollView>
 
-                <!-- Right Arrow -->
-                <Button x:Name="RightArrow"
+            <Button x:Name="RightArrow"
                         Text="▶"
                         TextColor="#005FA6"
                         BackgroundColor="Transparent"
