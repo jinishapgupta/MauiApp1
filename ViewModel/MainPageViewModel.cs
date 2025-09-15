@@ -16,27 +16,16 @@ namespace MauiApp1.ViewModels
         [ObservableProperty]
         private string selectedCategory = "All";
 
-        public ObservableCollection<Category> Categories { get; }
+        public ObservableCollection<Category> Categories { get; } = new();
 
         public ICommand IncreaseQuantityCommand { get; }
         public ICommand FilterCommand { get; }
 
         public MainPageViewModel()
         {
-           
-            Categories = new ObservableCollection<Category>
-            {
-                new Category { Name = "All", IsSelected = true },
-                new Category { Name = "Witbrood" },
-                new Category { Name = "Witbrood heel" },
-                new Category { Name = "Witbrood volkoren" },
-                new Category { Name = "Volkoren" },
-                new Category { Name = "Meergranen" },
-                new Category { Name = "Roggebrood" },
-                new Category { Name = "Glutenvrij" }
-            };
 
-            
+
+            Categories = new ObservableCollection<Category>();
             Products = new ObservableCollection<Product>
             {
                 new Product { Title = "Witbrood", Price = 4.00m, Image = "sandwich1.png", Quantity = 0, RibbonColor = null, Category="Witbrood" },
@@ -60,6 +49,15 @@ namespace MauiApp1.ViewModels
 
 
             };
+            var names = Products
+            .Select(p => p.Category)
+            .Where(c => !string.IsNullOrWhiteSpace(c))
+            .Distinct(StringComparer.OrdinalIgnoreCase)
+            .OrderBy(c => c);
+
+            Categories.Add(new Category { Name = "All", IsSelected = true });
+            foreach (var n in names)
+                Categories.Add(new Category { Name = n });
 
             FilteredProducts = new ObservableCollection<Product>(Products);
 

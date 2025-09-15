@@ -8,7 +8,6 @@ public class RibbonView : GraphicsView
 {
     private readonly RibbonDrawable _drawable;
 
-    // ✅ Only ONE bindable property
     public static readonly BindableProperty RibbonColorProperty =
         BindableProperty.Create(
             nameof(RibbonColor),
@@ -28,14 +27,12 @@ public class RibbonView : GraphicsView
         _drawable = new RibbonDrawable();
         Drawable = _drawable;
 
-        HeightRequest = 40;
-        WidthRequest = 50;
-
-        // Default clip (blue = top-right rounded)
+        HeightRequest = 75;
+        WidthRequest = 85;
         Clip = new RoundRectangleGeometry
         {
-            CornerRadius = new CornerRadius(0, 7, 0, 0),
-            Rect = new Rect(0, 0, 30, 30)
+            CornerRadius = new CornerRadius(0, 7, 10, 0),
+            Rect = new Rect(0, 0, 60, 60)
         };
     }
 
@@ -46,11 +43,9 @@ public class RibbonView : GraphicsView
             try
             {
                 view._drawable.RibbonColor = Color.FromArgb(hex);
-
-                //  Switch clip automatically depending on color
-                if (hex.Equals("#8BC34A", StringComparison.OrdinalIgnoreCase))
+            if (hex.Equals("#8BC34A", StringComparison.OrdinalIgnoreCase))
                 {
-                    // Green → top-left rounded
+                    
                     view.HeightRequest = 50;
                     view.WidthRequest = 30;
                     view.Clip = new RoundRectangleGeometry
@@ -61,7 +56,6 @@ public class RibbonView : GraphicsView
                 }
                 else
                 {
-                    // Blue (default) → top-right rounded
                     view.Clip = new RoundRectangleGeometry
                     {
                         CornerRadius = new CornerRadius(0, 7, 0, 7),
