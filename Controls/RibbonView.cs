@@ -26,9 +26,6 @@ public class RibbonView : GraphicsView
     {
         _drawable = new RibbonDrawable();
         Drawable = _drawable;
-
-        HeightRequest = 75;
-        WidthRequest = 85;
         Clip = new RoundRectangleGeometry
         {
             CornerRadius = new CornerRadius(0, 7, 10, 0),
@@ -46,8 +43,8 @@ public class RibbonView : GraphicsView
             if (hex.Equals("#8BC34A", StringComparison.OrdinalIgnoreCase))
                 {
                     
-                    view.HeightRequest = 50;
-                    view.WidthRequest = 30;
+                    view.HeightRequest = 35;
+                    view.WidthRequest = 35;
                     view.Clip = new RoundRectangleGeometry
                     {
                         CornerRadius = new CornerRadius(7, 0, 0, 7),
@@ -56,9 +53,11 @@ public class RibbonView : GraphicsView
                 }
                 else
                 {
+                    view.HeightRequest = 35;
+                    view.WidthRequest = 35;
                     view.Clip = new RoundRectangleGeometry
                     {
-                        CornerRadius = new CornerRadius(0, 7, 0, 7),
+                        CornerRadius = new CornerRadius(0, 7, 10, 0),
                         Rect = new Rect(0, 0, view.WidthRequest, view.HeightRequest)
                     };
                 }
