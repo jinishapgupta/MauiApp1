@@ -13,7 +13,7 @@ public partial class MainPage : ContentPage
 
     private async void OnScrollLeftClicked(object? sender, EventArgs e)
     {
-        // prevent negative scroll
+        
         var newX = Math.Max(0, CategoryScroll.ScrollX - 400);
         await CategoryScroll.ScrollToAsync(newX, 0, true);
     }

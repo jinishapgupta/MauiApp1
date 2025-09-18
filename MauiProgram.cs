@@ -20,12 +20,8 @@ namespace MauiApp1
                 });
 
             
-            builder.Services.AddSingleton<IProductService, ProductService>();
-
-            
+            builder.Services.AddSingleton<IProductService, ProductService>();   
             builder.Services.AddSingleton<MainPageViewModel>();
-
-           
             builder.Services.AddSingleton<MainPage>();
 
 #if DEBUG
