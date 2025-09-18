@@ -13,7 +13,7 @@ public class RibbonView : GraphicsView
             nameof(RibbonColor),
             typeof(string),
             typeof(RibbonView),
-            "#1976D2", // default = blue
+            "#1976D2", 
             propertyChanged: OnRibbonColorChanged);
 
     public string RibbonColor

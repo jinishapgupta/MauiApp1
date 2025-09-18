@@ -6,7 +6,7 @@
 
     <Grid HeightRequest="240" WidthRequest="140" Margin="8">
 
-        <!-- Card with hover -->
+      
         <ContentView HeightRequest="200"
                      WidthRequest="140"
                      VerticalOptions="End"
@@ -15,7 +15,7 @@
                 <RoundRectangleGeometry CornerRadius="7" Rect="0,0,140,200"/>
             </ContentView.Clip>
 
-            <!-- Hover states -->
+           
             <VisualStateManager.VisualStateGroups>
                 <VisualStateGroup Name="CardStates">
                     <VisualState Name="Normal">
@@ -31,7 +31,7 @@
                 </VisualStateGroup>
             </VisualStateManager.VisualStateGroups>
 
-            <!-- Inner card -->
+          
             <Border Stroke="#D1D1D1"
                     StrokeThickness="1"
                     StrokeShape="RoundRectangle 7"
@@ -39,7 +39,7 @@
                     Padding="12">
                 <Grid RowDefinitions="*,Auto">
 
-                    <!-- Title -->
+                   
                     <Label Grid.Row="0"
                            Text="{Binding Title}"
                            FontSize="18"
@@ -51,7 +51,6 @@
                            HeightRequest="50"
                            Margin="8,3,4,0" />
 
-                    <!-- Price -->
                     <Grid Grid.Row="1"
                           ColumnDefinitions="*,Auto"
                           VerticalOptions="End"
@@ -65,7 +64,6 @@
                 </Grid>
             </Border>
 
-            <!-- Tap Gesture -->
             <ContentView.GestureRecognizers>
                 <TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type views:MainPage}}, 
                                                           Path=BindingContext.IncreaseQuantityCommand}"
@@ -73,7 +71,7 @@
             </ContentView.GestureRecognizers>
         </ContentView>
 
-        <!-- Product Image Circle -->
+        
         <Border HeightRequest="80"
                 WidthRequest="80"
                 BackgroundColor="White"
@@ -94,9 +92,7 @@
                    HorizontalOptions="Center"
                    VerticalOptions="Center" />
         </Border>
-
-        <!-- Ribbon -->
-        <controls:RibbonView RibbonColor="{Binding RibbonColor}"
+      <controls:RibbonView RibbonColor="{Binding RibbonColor}"
                              IsVisible="{Binding HasRibbon}"
                              HeightRequest="50"
                              WidthRequest="30"
@@ -113,8 +109,7 @@
                 </DataTrigger>
             </controls:RibbonView.Triggers>
         </controls:RibbonView>
-
-        <!-- Quantity badge -->
+  
         <Grid HorizontalOptions="Start"
               VerticalOptions="End"
               Margin="18,2,1,12"
@@ -125,13 +120,10 @@
                 </DataTrigger>
             </Grid.Triggers>
 
-            <!-- Basket Icon -->
-            <Image Source="basket.png"
+      <Image Source="basket.png"
                    Aspect="AspectFit"
                    WidthRequest="34"
                    HeightRequest="34" />
-
-            <!-- Quantity Overlay -->
             <Label Text="{Binding Quantity}"
                    TextColor="White"
                    FontSize="12"
