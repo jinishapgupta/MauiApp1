@@ -5,10 +5,10 @@ namespace MauiApp1.Views;
 
 public partial class MainPage : ContentPage
 {
-    public MainPage()
+    public MainPage(MainPageViewModel vm) 
     {
         InitializeComponent();
-        BindingContext = new MainPageViewModel();
+        BindingContext = vm;
     }
 
     private async void OnScrollLeftClicked(object? sender, EventArgs e)
